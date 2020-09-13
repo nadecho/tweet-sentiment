@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Spyder Editor
-
-This is a temporary script file.
-"""
-
-
 import nltk
 from nltk.corpus import stopwords
 from  nltk.stem import SnowballStemmer
@@ -46,7 +38,7 @@ lemma = True
 # Data Import 
 # =============================================================================
 df = pd.read_csv(
-    r"C:\Users\Nade\Documents\Python Scripts\Sentiment Analysis\tweets.csv",
+    r"tweets.csv",
     encoding = "ISO-8859-1",
     names = ["sentiment", "ids", "date", "flag", "user", "text"]
 )
@@ -266,7 +258,8 @@ def predict(model, text):
     return {"label": label, 
             "score": float(score)}
 
-predict(LSTM_Model,"I love you")
+# Predict using the LSTM Model
+predict(LSTM_Model,"Happy time")
 
 # Save Models
 LSTM_Model.save("model.h5")
@@ -275,13 +268,3 @@ pickle.dump(tokenizer, open("tokenizer.pkl", "wb"), protocol=0)
 pickle.dump(LR_Model, open("LR_Model.pickle", "wb"), protocol=0)
 pickle.dump(BERNOULLI_Model, open("BERNOULLI_Model.pickle", "wb"), protocol=0)
 pickle.dump(SVC_Model, open("SVC_Model.pickle", "wb"), protocol=0)
-
-
-# Load Models
-
-LSTM_Model = load_model(r"C:\Users\Nade\Documents\Python Scripts\Sentiment Analysis\model.h5")
-w2v_model = gensim.models.Word2Vec.load(r"C:\Users\Nade\Documents\Python Scripts\Sentiment Analysis\model.w2v")
-tokenizer = pickle.load(open(r"C:\Users\Nade\Documents\Python Scripts\Sentiment Analysis\tokenizer.pkl", 'rb'))
-LR_Model = pickle.load(open(r"C:\Users\Nade\Documents\Python Scripts\Sentiment Analysis\LR_Model.pickle", 'rb'))
-BERNOULLI_Model = pickle.load(open(r"C:\Users\Nade\Documents\Python Scripts\Sentiment Analysis\BERNOULLI_Model.pickle", 'rb'))
-SVC_Model = pickle.load(open('SVC_Model.pickle', 'rb'))
